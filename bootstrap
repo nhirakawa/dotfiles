@@ -40,6 +40,9 @@ install() {
   do
     link $src
   done
+
+  echo ''
+  echo 'done'
 }
 
 install
