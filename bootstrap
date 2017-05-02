@@ -15,6 +15,13 @@ link() {
   local file=$(transform_symlink $(realpath --relative-to=$ROOT $src))
   local dst=$HOME/$file
 
+  if [ ! -z $dst ]
+  then
+    local dir=$(dirname $dst)
+    echo "Creating $dir"
+    mkdir -p $dir
+  fi
+
   if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
   then
     echo "OVERWRITING existing $dst"
