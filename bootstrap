@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd conf
+ROOT=$(pwd -P)
+
+transform_symlink() {
+  echo $1 | sed -E 's/\.?(.*)\.symlink/\.\1/'
+}
+
+link() {
+
+  local src=$1
+  local file=$(transform_symlink $(realpath --relative-to=$ROOT $src))
+  local dst=$HOME/$file
+
+  if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]
+  then
+    echo "OVERWRITING existing $dst"
+    rm $dst
+  fi
+
+  echo "creating link from $src to $dst"
+  ln -s "$src" "$dst"
+}
+
+install() {
+  echo 'Installing dotfiles'
+  echo ''
+
+  for src in $(find -H "$ROOT" -name '*.symlink' -not -path '*.git')
+  do
+    link $src
+  done
+}
+
+install

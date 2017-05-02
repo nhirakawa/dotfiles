@@ -1,0 +1,37 @@
+set nocompatible
+filetype off
+syntax on
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'L9'
+Plugin 'git://git.wincent.com/command-t.git'
+Plugin 'rust-lang/rust.vim'
+Plugin 'fatih/vim-go'
+Plugin 'ervandew/supertab'
+Plugin 'mattn/emmet-vim'
+Plugin 'tfnico/vim-gradle'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+call vundle#end()
+filetype plugin indent on
+
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
+set number
+
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+let g:user_emet_install_global = 0
+autocmd FileType html,css EmmetInstall
+
+let g:jsx_ext_required = 0
+
+au BufRead,BufNewFile *.go set filetype=go
