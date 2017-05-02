@@ -15,10 +15,10 @@ link() {
   local file=$(transform_symlink $(realpath --relative-to=$ROOT $src))
   local dst=$HOME/$file
 
-  if [ ! -z $dst ]
+  if [ ! -d $dst ]
   then
     local dir=$(dirname $dst)
-    echo "Creating $dir"
+    #echo "Creating $dir"
     mkdir -p $dir
   fi
 
