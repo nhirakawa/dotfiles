@@ -19,7 +19,11 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(git httpie mvn nmap node npm bower grunt gulp osx brew python pylint pip ssh-agent tmux)
+plugins=(httpie mvn nmap node npm bower grunt gulp python pylint pip ssh-agent tmux git)
+
+if [ "$(uname -s)" '==' "Darwin" ]; then
+  plugins+=(osx brew)
+fi
 
 # User configuration
 
@@ -45,7 +49,10 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_rsa"
 
+# git
+alias gpf="git push --force-with-lease"
+
+#mvn
 alias mvnpack="mvnc package"
 alias mvnda="mvnc dependency:analyze-only"
-alias gpf="git push --force-with-lease"
 alias mvncc="mvnc compile"
