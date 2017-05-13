@@ -13,7 +13,7 @@ set $mod Mod1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:DejaVu Sans Mono 10
+font pango:DejaVu Sans Mono,monospace 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -30,7 +30,7 @@ font pango:DejaVu Sans Mono 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec xterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -92,17 +92,28 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+set $workspace1  "1 Terminal"
+set $workspace2  "2 Chrome"
+set $workspace3  3
+set $workspace4  4
+set $workspace5  5
+set $workspace6  6
+set $workspace7  7
+set $workspace8  8
+set $workspace9  9
+set $workspace10 10
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
+bindsym $mod+4 workspace $workspace4
+bindsym $mod+5 workspace $workspace5
+bindsym $mod+6 workspace $workspace6
+bindsym $mod+7 workspace $workspace7
+bindsym $mod+8 workspace $workspace8
+bindsym $mod+9 workspace $workspace9
+bindsym $mod+0 workspace $workspace10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -155,23 +166,43 @@ bar {
   status_command i3status
     colors {
       background #37323e
-      statusline #de9e36
-      separator  #bfbdc1
-      
-      focused_workspace  #4c7899 #285577
-      active_workspace   #333333 #5f676a
-      inactive_workspace #2f343a #900000 #ffffff
-      urgent_workspace   #2f343a #900000 #ffffff
-      binding_mode       #2f343a #900000 #ffffff
+        statusline #de9e36
+        separator  #bfbdc1
+
+        focused_workspace  #4c7899 #285577
+        active_workspace   #333333 #5f676a
+        inactive_workspace #2f343a #900000 #ffffff
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #900000 #ffffff
     }
+  position top
 }
 
-#class                  border  backgr. text    indicator child_border
+set $text       #efefef
 
-client.focused          #4c7899 #285577 #ffffff #2e9ef4 #285777
-client.focused_inactive #333333 #5f67fa #ffffff #484e50 #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e #222222
-client.urgent           #2f343a #900000 #ffffff #900000 #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000 #0c0c0c
+#set $focused    #354b7e
+#set $inactive   #425685
+#set $unfocused  #2c457d
+#set $urgent     #b23243
+#set $indicator  #000000
 
-client.background       #000000
+set $unfocused #02eaff
+set $inactive  #008c99
+set $focused   #0050a4
+set $urgent    #ff7800
+
+
+#class                  border     backgr.    text    indicator    child_border
+
+client.focused          $focused   $focused   $text   $indicator   #285777
+client.focused_inactive $inactive  $inactive  $text   $indicator   #5f676a
+client.unfocused        $inactive  $inactive  $text   $indicator   #222222
+client.urgent           $urgent    $urgent    $text   $indicator   #900000
+
+client.background       #afafaf
+
+hide_edge_borders both
+
+bindsym $mod+Shift+x exec i3lock --color 475263
+
+assign [class="Google-chrome"] $workspace2
