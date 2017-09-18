@@ -32,6 +32,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin"
 if [ "$(uname -s)" '==' "Darwin" ]
 then
   export JAVA_HOME=$(/usr/libexec/java_home)
+  PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
 
 if [ ! -d "~/src/golang" ]
@@ -56,3 +57,4 @@ alias gpf="git push --force-with-lease"
 alias mvnpack="mvnc package"
 alias mvnda="mvnc dependency:analyze-only"
 alias mvncc="mvnc compile"
+alias mvnsort="mvn sortpom:sort -Dsort.sortDependencies=scope,groupId,artifactId"
