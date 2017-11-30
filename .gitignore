@@ -167,3 +167,6 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/vim,macos,linux,emacs,windows,notepadpp,sublimetext,visualstudiocode
+
+#nhirakawa custom
+.env/*
