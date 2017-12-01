@@ -1,2 +1,12 @@
-# dotfiles
-My personal dotfiles
+```
+    _______  __   __       _______     _______.
+   |   ____||  | |  |     |   ____|   /       |
+   |  |__   |  | |  |     |  |__     |   (----`
+   |   __|  |  | |  |     |   __|     \   \    
+ __|  |     |  | |  `----.|  |____.----)   |   
+(__)__|     |__| |_______||_______|_______/    
+
+```
+
+## How it works
+Everything in the `conf` folder with a `.symlink` extension will be symlinked to `~`. If the original filename is `file.symlink`, it will be written to `~/.file`. The directory structure in `conf` is also maintained - `files/file.symlink` will be written to `~/.files/.file`.
