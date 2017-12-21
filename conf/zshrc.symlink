@@ -56,5 +56,6 @@ alias gpf="git push --force-with-lease"
 #mvn
 alias mvnpack="mvnc package"
 alias mvnda="mvnc dependency:analyze-only"
-alias mvncc="mvnc compile"
+alias mvncc="mvn clean compile"
+alias mvncv="mvn clean verify"
 alias mvnsort="mvn sortpom:sort -Dsort.sortDependencies=scope,groupId,artifactId"
