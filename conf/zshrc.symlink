@@ -42,6 +42,11 @@ fi
 export GOPATH=~/src/golang
 export PATH=$GOPATH/bin:$PATH
 
+if [ -d ~/.cargo/bin ]
+then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 source $ZSH/oh-my-zsh.sh
 
 # Compilation flags
