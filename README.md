@@ -9,4 +9,13 @@
 ```
 
 ## How it works
-Everything in the `conf` folder with a `.symlink` extension will be symlinked to `~`. If the original filename is `conf/file.symlink`, it will be written to `~/.file`. The directory structure in `conf` is also maintained - `conf/files/file.symlink` will be written to `~/.files/.file`.
+Dotfiles will be symlinked to `~` according to `conf/index.json`.
+
+## Usage
+```
+usage: Install dotfiles [-h] [-b BACKUP]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -b BACKUP, --backup BACKUP
+```
