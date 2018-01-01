@@ -66,7 +66,7 @@ def read_index():
 
 def get_args():
     parser = argparse.ArgumentParser('Install dotfiles')
-    parser.add_argument('-b', '--backup', type=str, default='bak')
+    parser.add_argument('-b', '--backup', type=str, default='bak', help='Extension of backup files')
     return parser.parse_args()
 
 

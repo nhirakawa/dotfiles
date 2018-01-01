@@ -18,4 +18,5 @@ usage: Install dotfiles [-h] [-b BACKUP]
 optional arguments:
   -h, --help            show this help message and exit
   -b BACKUP, --backup BACKUP
+                        Extension of backup files
 ```
