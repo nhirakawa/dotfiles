@@ -1,0 +1,49 @@
+# force a reload of the config file
+unbind r
+bind r source-file ~/.tmux.conf\; display "reload"
+
+# ctrl-a
+set -g prefix C-a
+bind C-a send-prefix
+
+# uunbind ctrl-b
+unbind C-b
+
+# setting delay between prefix and command
+set -g escape-time 1
+
+# 1-indexing
+set -g base-index 1
+set -g pane-base-index 1
+
+bind | split-window -h
+bind - split-window -v
+
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
+
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+#set -g mouse on
+
+set -g default-terminal "screen-256color"
+
+setw -g pane-border-style fg=green,bg=black
+setw -g pane-active-border-style fg=white,bg=yellow
+
+setw -g window-active-style fg=white
+setw -g window-style fg=colour240,bg=colour235
+
+set -g message-style fg=white,bold,bg=black
+
+source-file ${HOME}/src/tmux-themepack/powerline/block/orange.tmuxtheme
+
+setw -g mode-keys vi
