@@ -44,6 +44,10 @@ setw -g window-style fg=colour240,bg=colour235
 
 set -g message-style fg=white,bold,bg=black
 
-source-file ${HOME}/src/tmux-themepack/powerline/block/orange.tmuxtheme
+#source-file ${HOME}/src/tmux-themepack/powerline/block/orange.tmuxtheme
+
+set -g @plugin 'jimeh/tmux-themepack'
+
+set -g @themepack 'powerline/block/orange'
 
 setw -g mode-keys vi
