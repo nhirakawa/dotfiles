@@ -14,6 +14,7 @@ CONF_DIR = path.abspath('conf')
 USER_DIR = path.expanduser('~')
 JSON_DIR = 'conf/index.json'
 
+
 def main():
     args = get_args()
 
@@ -68,7 +69,8 @@ def read_index():
 
 def get_args():
     parser = argparse.ArgumentParser('Install dotfiles')
-    parser.add_argument('-b', '--backup', type=str, default='bak', help='Extension of backup files')
+    parser.add_argument('-b', '--backup', type=str,
+                        default='bak', help='Extension of backup files')
     return parser.parse_args()
 
 

@@ -19,7 +19,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(httpie mvn nmap node npm bower grunt gulp python pylint pip ssh-agent tmux git)
+plugins=(httpie mvn python pylint pip ssh-agent tmux git rust)
 
 if [ "$(uname -s)" '==' "Darwin" ]; then
   plugins+=(osx brew)
@@ -35,12 +35,12 @@ then
   PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
 
-if [ ! -d "~/src/golang" ]
+if [ ! -z "$(which go)" ]
 then
   mkdir -p ~/src/golang
+  export GOPATH=~/src/golang
+  export PATH=$GOPATH/bin:$PATH
 fi
-export GOPATH=~/src/golang
-export PATH=$GOPATH/bin:$PATH
 
 if [ -d ~/.cargo/bin ]
 then
