@@ -61,6 +61,24 @@ def main():
         print('  linking {} to {}'.format(source, target))
         os.symlink(source, target)
 
+    link_zshrc()
+
+
+def link_zshrc():
+    source = path.join(CONF_DIR, 'base.zshrc')
+    target = path.join(USER_DIR, '.zshrc')
+    with open(target, mode='a+') as zshrc:
+        zshrc.seek(0)
+        whole_file = zshrc.read()
+
+        source_statement = f'source {source}'
+        if source_statement in whole_file:
+            print(f'{target} already contains source')
+            return
+
+        print(f'adding source statement to {target}')
+        zshrc.write(f'{source_statement}\n')
+
 
 def read_index():
     with open(JSON_DIR) as j:

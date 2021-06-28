@@ -1,28 +1,23 @@
 {
-  "dotfiles": [
-    {
-      "source": "bashrc.symlink",
-      "target": ".bashrc"
-    },
-    {
-      "source": "vimrc.symlink",
-      "target": ".vimrc"
-    },
-    {
-      "source": "zshrc.symlink",
-      "target": ".zshrc"
-    },
-    {
-      "source": "i3-config.symlink",
-      "target": ".i3/.config"
-    },
-    {
-      "source": "i3status.conf.symlink",
-      "target": ".i3status.conf"
-    },
-    {
-      "source": "tmux.conf.symlink",
-      "target": ".tmux.conf"
-    }
-  ]
+    "dotfiles": [{
+            "source": "bashrc.symlink",
+            "target": ".bashrc"
+        },
+        {
+            "source": "vimrc.symlink",
+            "target": ".vimrc"
+        },
+        {
+            "source": "i3-config.symlink",
+            "target": ".i3/.config"
+        },
+        {
+            "source": "i3status.conf.symlink",
+            "target": ".i3status.conf"
+        },
+        {
+            "source": "tmux.conf.symlink",
+            "target": ".tmux.conf"
+        }
+    ]
 }
