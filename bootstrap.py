@@ -71,13 +71,13 @@ def link_zshrc():
         zshrc.seek(0)
         whole_file = zshrc.read()
 
-        source_statement = f'source {source}'
+        source_statement = 'source {}'.format(source)
         if source_statement in whole_file:
-            print(f'{target} already contains source')
+            print('{} already contains source'.format(target))
             return
 
-        print(f'adding source statement to {target}')
-        zshrc.write(f'{source_statement}\n')
+        print('adding source statement to {}'.format(target))
+        zshrc.write('{}\n'.format(source_statement))
 
 
 def read_index():
