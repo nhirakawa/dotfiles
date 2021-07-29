@@ -35,7 +35,7 @@ then
   PATH="/usr/local/opt/python/libexec/bin:$PATH"
 fi
 
-if [ ! -z "$(which go)" ]
+if [ -n "$(command -v go)" ]
 then
   mkdir -p ~/src/golang
   export GOPATH=~/src/golang
