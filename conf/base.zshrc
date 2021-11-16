@@ -22,7 +22,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(httpie mvn python pylint pip ssh-agent tmux git rust)
 
 if [ "$(uname -s)" '==' "Darwin" ]; then
-  plugins+=(osx brew)
+  plugins+=(macos brew)
 fi
 
 # User configuration
