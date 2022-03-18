@@ -20,7 +20,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(httpie mvn python pylint pip ssh-agent tmux git rust)
+plugins=(httpie mvn ssh-agent tmux git rust)
 
 if [ "$(uname -s)" '==' "Darwin" ]; then
   plugins+=(macos brew)
