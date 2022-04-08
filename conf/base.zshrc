@@ -20,21 +20,26 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(httpie mvn ssh-agent tmux git rust)
+plugins=(mvn ssh-agent git)
 
-if [ "$(uname -s)" '==' "Darwin" ]; then
-  plugins+=(macos brew)
+if command -v http &> /dev/null
+then
+  plugins+=(httpie)
+fi
+
+if command -v rustc &> rust
+then
+  plugins+=(rust)
+fi
+
+if command -v tmux &> /dev/null
+then
+  plugins+=(tmux)
 fi
 
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
-
-if [ "$(uname -s)" '==' "Darwin" ]
-then
-  export JAVA_HOME=$(/usr/libexec/java_home)
-  PATH="/usr/local/opt/python/libexec/bin:$PATH"
-fi
 
 if [ -n "$(command -v go)" ]
 then
