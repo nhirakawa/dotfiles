@@ -62,6 +62,7 @@ def main():
         os.symlink(source, target)
 
     link_zshrc()
+    link_nickhirakawa_theme()
 
 
 def link_zshrc():
@@ -83,6 +84,17 @@ def link_zshrc():
 def read_index():
     with open(JSON_DIR) as j:
         return json.load(j)
+
+
+def link_nickhirakawa_theme():
+    source = path.join(CONF_DIR, 'nickhirakawa.zsh-theme')
+    target = path.join(USER_DIR, '.oh-my-zsh', 'themes', 'nickhirakawa.zsh-theme')
+
+    print()
+    print('installing {}'.format(source))
+    print('  linking {} to {}'.format(source, target))
+
+    os.symlink(source, target)
 
 
 def get_args():

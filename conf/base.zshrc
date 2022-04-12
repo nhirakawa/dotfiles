@@ -27,7 +27,7 @@ then
   plugins+=(httpie)
 fi
 
-if command -v rustc &> rust
+if command -v rustc &> /dev/null
 then
   plugins+=(rust)
 fi
