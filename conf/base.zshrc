@@ -5,7 +5,8 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ 
+ZSH_THEME="${ZSH_THEME:=robbyrussell}"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -19,23 +20,28 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(httpie mvn python pylint pip ssh-agent tmux git rust)
+plugins=(mvn ssh-agent git)
 
-if [ "$(uname -s)" '==' "Darwin" ]; then
-  plugins+=(osx brew)
+if command -v http &> /dev/null
+then
+  plugins+=(httpie)
+fi
+
+if command -v rustc &> /dev/null
+then
+  plugins+=(rust)
+fi
+
+if command -v tmux &> /dev/null
+then
+  plugins+=(tmux)
 fi
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$PATH"
 
-if [ "$(uname -s)" '==' "Darwin" ]
-then
-  export JAVA_HOME=$(/usr/libexec/java_home)
-  PATH="/usr/local/opt/python/libexec/bin:$PATH"
-fi
-
-if [ ! -z "$(which go)" ]
+if [ -n "$(command -v go)" ]
 then
   mkdir -p ~/src/golang
   export GOPATH=~/src/golang

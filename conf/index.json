@@ -1,8 +1,5 @@
 {
-    "dotfiles": [{
-            "source": "bashrc.symlink",
-            "target": ".bashrc"
-        },
+    "dotfiles": [
         {
             "source": "vimrc.symlink",
             "target": ".vimrc"
