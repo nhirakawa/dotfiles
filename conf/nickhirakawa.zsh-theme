@@ -10,6 +10,10 @@ prompt_indicator() {
 }
 
 kube_cluster() {
+  if [[ ! -a ~/.kube/config ]]; then
+    return
+  fi
+
   echo "%B%F{$KUBE_CLUSTER_COLOR}$(grep -m 1 'current-context:' ~/.kube/config | cut -d ' ' -f 2)%f%b"
 }
 
