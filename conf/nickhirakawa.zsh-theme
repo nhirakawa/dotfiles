@@ -15,14 +15,19 @@ kube_cluster() {
 
 kube_namespace() {
   if command -v raw-kubectl &> /dev/null
-then
-  echo -n "$(raw-kubectl config get-contexts | grep '*' | awk '{ print $5 }')"
-else
-  echo -n "$(kubectl config get-contexts | grep '*' | awk '{ print $5 }')"
-fi
+  then
+    echo -n "$(raw-kubectl config get-contexts | grep '*' | awk '{ print $5 }')"
+  else
+    echo -n "$(kubectl config get-contexts | grep '*' | awk '{ print $5 }')"
+  fi
 }
 
 kubernetes() {
+  if ! command -v kubectl &> /dev/null
+  then
+    return
+  fi
+
   KUBE_NAMESPACE="$(kube_namespace)"
 
   if [[ $KUBE_NAMESPACE = *[![:space:]]* ]]; then
@@ -49,20 +54,28 @@ git_prompt() {
 }
 
 prompt() {
+  KUBE="$(kubernetes)"
+  GIT="$(git_prompt)"
+
+#  if [[ -z "$KUBE" && -z "$GIT" ]]; then
+#    echo -n " $(directory)"
+#    return
+#  fi
+
   echo -n "[ "
 
-  KUBE="$(kubernetes)"
   if [ ! -z "$KUBE" ]; then
     echo -n "$KUBE"
     echo -n " | "
   fi
 
   echo -n "$(directory)"
-  GIT="$(git_prompt)"
+
   if [[ $GIT = *[![:space:]]* ]]; then
     echo -n " | " 
     echo -n "$GIT"
   fi
+
   echo -n " ]%k"
 }
 
