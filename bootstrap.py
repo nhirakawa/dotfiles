@@ -6,6 +6,7 @@ import argparse
 import json
 import os
 import os.path as path
+import subprocess
 import sys
 import time
 
@@ -64,10 +65,18 @@ def main():
     link_zshrc()
     link_nickhirakawa_theme()
 
+    if args.install_vim_plugins:
+        plugin_install_result = subprocess.run(["vim", "+PluginInstall", "+qall"])
+        if plugin_install_result.returncode != 0:
+            print('Error when installing vim plugins - code {}', plugin_install_result.returncode)
+
 
 def link_zshrc():
     source = path.join(CONF_DIR, 'base.zshrc')
     target = path.join(USER_DIR, '.zshrc')
+
+    print()
+
     with open(target, mode='a+') as zshrc:
         zshrc.seek(0)
         whole_file = zshrc.read()
@@ -91,6 +100,11 @@ def link_nickhirakawa_theme():
     target = path.join(USER_DIR, '.oh-my-zsh', 'themes', 'nickhirakawa.zsh-theme')
 
     print()
+
+    if path.lexists(target):
+        print('theme symlink already exists - skipping')
+        return
+
     print('installing {}'.format(source))
     print('  linking {} to {}'.format(source, target))
 
@@ -101,6 +115,7 @@ def get_args():
     parser = argparse.ArgumentParser('Install dotfiles')
     parser.add_argument('-b', '--backup', type=str,
                         default='bak', help='Extension of backup files')
+    parser.add_argument('--install-vim-plugins', dest='install_vim_plugins', action='store_true', help='If true, installs Vundle plugins')
     return parser.parse_args()
 
 
