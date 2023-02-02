@@ -18,6 +18,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'sheerun/vim-polyglot'
 
 call vundle#end()
 filetype plugin indent on
