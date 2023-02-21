@@ -18,11 +18,11 @@ kube_cluster() {
 }
 
 kube_namespace() {
-  if command -v raw-kubectl &> /dev/null
+  if command -v native-kubectl &> /dev/null
   then
-    echo -n "$(raw-kubectl config get-contexts | grep '*' | awk '{ print $5 }')"
+    echo -n "$(native-kubectl config get-contexts 2>/dev/null | grep '*' | awk '{ print $5 }')"
   else
-    echo -n "$(kubectl config get-contexts | grep '*' | awk '{ print $5 }')"
+    echo -n "$(kubectl config get-contexts 2>/dev/null | grep '*' | awk '{ print $5 }')"
   fi
 }
 
