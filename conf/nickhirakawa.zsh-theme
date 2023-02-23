@@ -1,4 +1,5 @@
 # colors
+MACHINE_NAME_COLOR="#5f00d7"
 KUBE_COLOR="#005fd7"
 KUBE_CLUSTER_COLOR="#005FFF"
 KUBE_NAMESPACE_COLOR="#0087ff"
@@ -7,6 +8,10 @@ GIT_COLOR="#FFAB08"
 
 prompt_indicator() {
    echo $'%B\u276f%b'
+}
+
+machine_name() {
+  echo "%B%F{$MACHINE_NAME_COLOR}$(uname -n)%f%b"
 }
 
 kube_cluster() {
@@ -58,6 +63,7 @@ git_prompt() {
 }
 
 prompt() {
+  MACHINE_NAME="$(machine_name)"
   KUBE="$(kubernetes)"
   GIT="$(git_prompt)"
 
@@ -67,6 +73,11 @@ prompt() {
 #  fi
 
   echo -n "[ "
+
+  if [ ! -z "$MACHINE_NAME" ]; then
+    echo -n "$MACHINE_NAME"
+    echo -n " | "
+  fi
 
   if [ ! -z "$KUBE" ]; then
     echo -n "$KUBE"
