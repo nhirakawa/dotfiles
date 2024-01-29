@@ -71,7 +71,7 @@ alias mvncc="mvn clean compile"
 alias mvncv="mvn clean verify"
 alias mvnsort="mvn sortpom:sort -Dsort.sortDependencies=scope,groupId,artifactId"
 
-if [ -f ~/.config/dotfiles.zsh ]
+if [ -e ~/.config/dotfiles.zsh ]
 then
   source ~/.config/dotfiles.zsh
 fi
