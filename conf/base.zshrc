@@ -1,6 +1,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
+if [ -e ~/.config/dotfiles.zsh ]
+then
+  source ~/.config/dotfiles.zsh
+fi
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -70,8 +75,3 @@ alias mvnda="mvnc dependency:analyze-only"
 alias mvncc="mvn clean compile"
 alias mvncv="mvn clean verify"
 alias mvnsort="mvn sortpom:sort -Dsort.sortDependencies=scope,groupId,artifactId"
-
-if [ -e ~/.config/dotfiles.zsh ]
-then
-  source ~/.config/dotfiles.zsh
-fi
