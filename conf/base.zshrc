@@ -25,7 +25,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(mvn ssh-agent git)
+plugins=(ssh-agent git)
 
 if command -v http &> /dev/null
 then
