@@ -71,6 +71,19 @@ alias mvncc="mvn clean compile"
 alias mvncv="mvn clean verify"
 alias mvnsort="mvn sortpom:sort -Dsort.sortDependencies=scope,groupId,artifactId"
 
+# Timestamp functions
+date_str() {
+  date +%Y%m%d
+}
+
+time_str() {
+  date +%H%M%S
+}
+
+datetime_str() {
+  date +%Y%m%d-%H%M%S
+}
+
 if [ -e ~/.config/dotfiles.zsh ]
 then
   source ~/.config/dotfiles.zsh
