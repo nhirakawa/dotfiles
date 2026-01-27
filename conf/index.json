@@ -15,6 +15,10 @@
         {
             "source": "tmux.conf.symlink",
             "target": ".tmux.conf"
+        },
+        {
+            "source": "starship.toml",
+            "target": ".config/starship.toml"
         }
     ]
 }

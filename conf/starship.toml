@@ -1,0 +1,13 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+[package]
+disabled = true
+
+[kubernetes]
+disabled = false
+
+[java]
+disabled = true
+
