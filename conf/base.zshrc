@@ -89,6 +89,11 @@ datetime_str() {
   date +%Y%m%d-%H%M%S
 }
 
+if command -v atuin &> /dev/null
+then
+  eval "$(atuin init zsh)"
+fi
+
 if [ -e ~/.config/dotfiles.zsh ]
 then
   source ~/.config/dotfiles.zsh
