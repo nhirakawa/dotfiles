@@ -20,7 +20,7 @@ ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-plugins=(ssh-agent git)
+plugins=(ssh-agent git nvm)
 
 if command -v http &> /dev/null
 then
@@ -52,6 +52,11 @@ if [ -d ~/.cargo/bin ]
 then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
+
+# https://github.com/ohmyzsh/ohmyzsh/tree/1514145a09140425b914e9cd98fc1d638a8c4003/plugins/nvm#lazy-startup
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:nvm' autoload yes
+zstyle ':omz:plugins:nvm' silent-autoload yes
 
 source $ZSH/oh-my-zsh.sh
 
