@@ -3,6 +3,7 @@
 from __future__ import print_function
 
 import argparse
+import glob
 import json
 import os
 import os.path as path
@@ -14,6 +15,7 @@ import time
 CONF_DIR = path.abspath('conf')
 USER_DIR = path.expanduser('~')
 JSON_DIR = 'conf/index.json'
+MAX_BACKUPS = 5
 
 
 def main():
@@ -58,6 +60,7 @@ def main():
             backup_name = '{}.{}.{}'.format(target, now, backup_extension)
             print('  backing up {} to {}'.format(target, backup_name))
             os.rename(target, backup_name)
+            prune_backups(target, backup_extension)
 
         print('  linking {} to {}'.format(source, target))
         os.symlink(source, target)
@@ -69,6 +72,14 @@ def main():
         plugin_install_result = subprocess.run(["vim", "+PluginInstall", "+qall"])
         if plugin_install_result.returncode != 0:
             print('Error when installing vim plugins - code {}', plugin_install_result.returncode)
+
+
+def prune_backups(target, backup_extension):
+    pattern = '{}.*.{}'.format(target, backup_extension)
+    backups = sorted(glob.glob(pattern), reverse=True)
+    for old_backup in backups[MAX_BACKUPS:]:
+        print('  removing old backup {}'.format(old_backup))
+        os.remove(old_backup)
 
 
 def link_zshrc():
