@@ -94,6 +94,11 @@ then
   eval "$(atuin init zsh)"
 fi
 
+if command -v starship &> /dev/null
+then
+  eval "$(starship init zsh)"
+fi
+
 if [ -e ~/.config/dotfiles.zsh ]
 then
   source ~/.config/dotfiles.zsh
