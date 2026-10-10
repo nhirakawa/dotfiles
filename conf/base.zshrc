@@ -37,6 +37,11 @@ then
   plugins+=(tmux)
 fi
 
+if command -v direnv &> /dev/null
+then
+  plugins+=(direnv)
+fi
+
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:$HOME/.local/bin:$PATH"
