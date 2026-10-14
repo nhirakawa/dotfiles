@@ -40,22 +40,22 @@ fi
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 plugins=(ssh-agent git nvm)
 
-if command -v http &> /dev/null
+if (( $+commands[http] ))
 then
   plugins+=(httpie)
 fi
 
-if command -v rustc &> /dev/null
+if (( $+commands[rustc] ))
 then
   plugins+=(rust)
 fi
 
-if command -v tmux &> /dev/null
+if (( $+commands[tmux] ))
 then
   plugins+=(tmux)
 fi
 
-if command -v direnv &> /dev/null
+if (( $+commands[direnv] ))
 then
   plugins+=(direnv)
 fi
@@ -98,12 +98,12 @@ datetime_str() {
   date +%Y%m%d-%H%M%S
 }
 
-if command -v atuin &> /dev/null
+if (( $+commands[atuin] ))
 then
   eval "$(atuin init zsh)"
 fi
 
-if command -v starship &> /dev/null
+if (( $+commands[starship] ))
 then
   eval "$(starship init zsh)"
 fi
