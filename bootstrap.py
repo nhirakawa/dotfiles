@@ -12,9 +12,10 @@ import sys
 import time
 
 
-CONF_DIR = path.abspath('conf')
+REPO_DIR = path.dirname(path.abspath(__file__))
+CONF_DIR = path.join(REPO_DIR, 'conf')
 USER_DIR = path.expanduser('~')
-JSON_DIR = 'conf/index.json'
+JSON_DIR = path.join(CONF_DIR, 'index.json')
 MAX_BACKUPS = 5
 ZSHRC_BLOCK_BEGIN = '# >>> dotfiles (managed by bootstrap.py) >>>'
 ZSHRC_BLOCK_END = '# <<< dotfiles <<<'
