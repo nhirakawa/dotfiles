@@ -50,39 +50,41 @@ def main():
 
         source = path.join(CONF_DIR, dotfile['source'])
         target = path.join(USER_DIR, dotfile['target'])
-
-        print()
-        print('installing {}'.format(source))
-
-        directory_name = path.dirname(target)
-        if not path.exists(directory_name):
-            print('  creating directory {}'.format(directory_name))
-            os.makedirs(directory_name)
-
-        if path.islink(target) and os.readlink(target) == source:
-            print('  {} already linked to {} - skipping'.format(target, source))
-            continue
-
-        if path.lexists(target):
-            if args.preserve_files:
-                backup_name = '{}.{}.{}'.format(target, now, backup_extension)
-                print('  backing up {} to {}'.format(target, backup_name))
-                os.rename(target, backup_name)
-                prune_backups(target, backup_extension)
-            else:
-                print('  removing {}'.format(target))
-                os.remove(target)
-
-        print('  linking {} to {}'.format(source, target))
-        os.symlink(source, target)
+        link(source, target, args.preserve_files, backup_extension, now)
 
     link_zshrc()
-    link_nickhirakawa_theme()
 
     if args.install_vim_plugins:
         plugin_install_result = subprocess.run(["vim", "+PluginInstall", "+qall"])
         if plugin_install_result.returncode != 0:
             print('Error when installing vim plugins - code {}', plugin_install_result.returncode)
+
+
+def link(source, target, preserve_files, backup_extension, now):
+    print()
+    print('installing {}'.format(source))
+
+    directory_name = path.dirname(target)
+    if not path.exists(directory_name):
+        print('  creating directory {}'.format(directory_name))
+        os.makedirs(directory_name)
+
+    if path.islink(target) and os.readlink(target) == source:
+        print('  {} already linked to {} - skipping'.format(target, source))
+        return
+
+    if path.lexists(target):
+        if preserve_files:
+            backup_name = '{}.{}.{}'.format(target, now, backup_extension)
+            print('  backing up {} to {}'.format(target, backup_name))
+            os.rename(target, backup_name)
+            prune_backups(target, backup_extension)
+        else:
+            print('  removing {}'.format(target))
+            os.remove(target)
+
+    print('  linking {} to {}'.format(source, target))
+    os.symlink(source, target)
 
 
 def prune_backups(target, backup_extension):
@@ -137,31 +139,6 @@ def link_zshrc():
 def read_index():
     with open(JSON_DIR) as j:
         return json.load(j)
-
-
-def link_nickhirakawa_theme():
-    source = path.join(CONF_DIR, 'nickhirakawa.zsh-theme')
-    target = path.join(USER_DIR, '.oh-my-zsh', 'themes', 'nickhirakawa.zsh-theme')
-
-    print()
-
-    directory_name = path.dirname(target)
-    if not path.exists(directory_name):
-        print('  creating directory {}'.format(directory_name))
-        os.makedirs(directory_name)
-
-    if path.islink(target) and os.readlink(target) == source:
-        print('  {} already linked to {} - skipping'.format(target, source))
-        return
-
-    if path.lexists(target):
-        print('  removing {}'.format(target))
-        os.remove(target)
-
-    print('installing {}'.format(source))
-    print('  linking {} to {}'.format(source, target))
-
-    os.symlink(source, target)
 
 
 def get_args():

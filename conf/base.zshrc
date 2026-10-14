@@ -1,12 +1,12 @@
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
- 
-ZSH_THEME="${ZSH_THEME:=robbyrussell}"
+# Custom themes/plugins live outside the oh-my-zsh checkout
+ZSH_CUSTOM="${ZSH_CUSTOM:=${XDG_CONFIG_HOME:-$HOME/.config}/oh-my-zsh}"
+
+# No oh-my-zsh theme - starship (initialized below) handles the prompt.
+# Set ZSH_THEME before sourcing this file to use one anyway.
+ZSH_THEME="${ZSH_THEME:-}"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
