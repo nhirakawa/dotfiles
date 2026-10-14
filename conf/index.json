@@ -11,6 +11,10 @@
         {
             "source": "starship.toml",
             "target": ".config/starship.toml"
+        },
+        {
+            "source": "base.fish",
+            "target": ".config/fish/conf.d/dotfiles.fish"
         }
     ]
 }
