@@ -16,6 +16,8 @@ CONF_DIR = path.abspath('conf')
 USER_DIR = path.expanduser('~')
 JSON_DIR = 'conf/index.json'
 MAX_BACKUPS = 5
+ZSHRC_BLOCK_BEGIN = '# >>> dotfiles (managed by bootstrap.py) >>>'
+ZSHRC_BLOCK_END = '# <<< dotfiles <<<'
 
 
 def main():
@@ -96,17 +98,39 @@ def link_zshrc():
 
     print()
 
-    with open(target, mode='a+') as zshrc:
-        zshrc.seek(0)
-        whole_file = zshrc.read()
+    block = '{}\n[[ -r {source} ]] && source {source}\n{}\n'.format(
+        ZSHRC_BLOCK_BEGIN, ZSHRC_BLOCK_END, source=source)
 
-        source_statement = 'source {}'.format(source)
-        if source_statement in whole_file:
-            print('{} already contains source'.format(target))
-            return
+    content = ''
+    if path.exists(target):
+        with open(target) as zshrc:
+            content = zshrc.read()
 
-        print('adding source statement to {}'.format(target))
-        zshrc.write('{}\n'.format(source_statement))
+    start = content.find(ZSHRC_BLOCK_BEGIN)
+    end = content.find(ZSHRC_BLOCK_END, start)
+    if start != -1 and end != -1:
+        before = content[:start]
+        after = content[end + len(ZSHRC_BLOCK_END):]
+    else:
+        before = content
+        after = ''
+
+    # Surround the block with exactly one blank line on each side
+    before = before.rstrip('\n')
+    after = after.lstrip('\n')
+    new_content = block
+    if before:
+        new_content = before + '\n\n' + new_content
+    if after:
+        new_content = new_content + '\n' + after
+
+    if new_content == content:
+        print('{} managed block already up to date'.format(target))
+        return
+
+    print('writing managed block to {}'.format(target))
+    with open(target, mode='w') as zshrc:
+        zshrc.write(new_content)
 
 
 def read_index():
