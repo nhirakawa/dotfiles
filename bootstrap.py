@@ -120,9 +120,18 @@ def link_nickhirakawa_theme():
 
     print()
 
-    if path.lexists(target):
-        print('theme symlink already exists - skipping')
+    directory_name = path.dirname(target)
+    if not path.exists(directory_name):
+        print('  creating directory {}'.format(directory_name))
+        os.makedirs(directory_name)
+
+    if path.islink(target) and os.readlink(target) == source:
+        print('  {} already linked to {} - skipping'.format(target, source))
         return
+
+    if path.lexists(target):
+        print('  removing {}'.format(target))
+        os.remove(target)
 
     print('installing {}'.format(source))
     print('  linking {} to {}'.format(source, target))
