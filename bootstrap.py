@@ -56,6 +56,10 @@ def main():
             print('  creating directory {}'.format(directory_name))
             os.makedirs(directory_name)
 
+        if path.islink(target) and os.readlink(target) == source:
+            print('  {} already linked to {} - skipping'.format(target, source))
+            continue
+
         if path.lexists(target):
             if args.preserve_files:
                 backup_name = '{}.{}.{}'.format(target, now, backup_extension)
