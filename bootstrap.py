@@ -57,10 +57,14 @@ def main():
             os.makedirs(directory_name)
 
         if path.lexists(target):
-            backup_name = '{}.{}.{}'.format(target, now, backup_extension)
-            print('  backing up {} to {}'.format(target, backup_name))
-            os.rename(target, backup_name)
-            prune_backups(target, backup_extension)
+            if args.preserve_files:
+                backup_name = '{}.{}.{}'.format(target, now, backup_extension)
+                print('  backing up {} to {}'.format(target, backup_name))
+                os.rename(target, backup_name)
+                prune_backups(target, backup_extension)
+            else:
+                print('  removing {}'.format(target))
+                os.remove(target)
 
         print('  linking {} to {}'.format(source, target))
         os.symlink(source, target)
@@ -126,6 +130,8 @@ def get_args():
     parser = argparse.ArgumentParser('Install dotfiles')
     parser.add_argument('-b', '--backup', type=str,
                         default='bak', help='Extension of backup files')
+    parser.add_argument('--preserve-files', dest='preserve_files', action='store_true',
+                        help='If true, backs up existing files instead of overwriting them')
     parser.add_argument('--install-vim-plugins', dest='install_vim_plugins', action='store_true', help='If true, installs Vundle plugins')
     return parser.parse_args()
 
