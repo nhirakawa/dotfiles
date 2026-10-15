@@ -1,20 +1,24 @@
 {
-    "dotfiles": [
-        {
-            "source": "vimrc.symlink",
-            "target": ".vimrc"
-        },
-        {
-            "source": "tmux.conf.symlink",
-            "target": ".tmux.conf"
-        },
-        {
-            "source": "starship.toml",
-            "target": ".config/starship.toml"
-        },
-        {
-            "source": "base.fish",
-            "target": ".config/fish/conf.d/dotfiles.fish"
-        }
-    ]
+  "dotfiles": [
+    {
+      "source": "vimrc.symlink",
+      "target": ".vimrc"
+    },
+    {
+      "source": "tmux.conf.symlink",
+      "target": ".tmux.conf"
+    },
+    {
+      "source": "starship.toml",
+      "target": ".config/starship.toml"
+    },
+    {
+      "source": "base.fish",
+      "target": ".config/fish/conf.d/dotfiles.fish"
+    },
+    {
+      "source": "nvim",
+      "target": ".config/nvim"
+    }
+  ]
 }

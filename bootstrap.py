@@ -7,6 +7,7 @@ import glob
 import json
 import os
 import os.path as path
+import shutil
 import subprocess
 import sys
 import time
@@ -81,7 +82,7 @@ def link(source, target, preserve_files, backup_extension, now):
             prune_backups(target, backup_extension)
         else:
             print('  removing {}'.format(target))
-            os.remove(target)
+            remove(target)
 
     print('  linking {} to {}'.format(source, target))
     os.symlink(source, target)
@@ -92,7 +93,14 @@ def prune_backups(target, backup_extension):
     backups = sorted(glob.glob(pattern), reverse=True)
     for old_backup in backups[MAX_BACKUPS:]:
         print('  removing old backup {}'.format(old_backup))
-        os.remove(old_backup)
+        remove(old_backup)
+
+
+def remove(target):
+    if path.isdir(target) and not path.islink(target):
+        shutil.rmtree(target)
+    else:
+        os.remove(target)
 
 
 def link_zshrc():
